@@ -1,36 +1,55 @@
 /* Style for image placeholder */
 .image-placeholder-large {
-    /* Task 1 styling */
-    {{insert code here}}
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background-color: blue;
 }
 
 /* Style for product image */
 .product-image-large {
-    /* Task 2 styling */
-    {{insert code here}}
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 /* Style for 'no image available' placeholder */
 .no-image-available-large {
-    /* Task 3 styling */
-    {{insert code here}}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc;
+    color: 333;
+    font-size: 16px;    
 }
 
 /* Style for card header */
 .card-header {
-    /* Task 4 styling */
-    {{insert code here}}
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 14px;
 }
 
 /* Style for details title */
 .details-title {
-    /* Task 5 styling */
-    {{insert code here}}
+    font-size: 28px;
+    color: #333;
 }
 
 /* Style for comments section */
 .comments-section {
-    /* Task 6 styling */
-    {{insert code here}}
+    margin-top: 20px;
 }
 
+.comments-section .card {
+    margin-bottom: 15px;
+}
+
+.comments-section .comments-section {
+    font-weight: bold;
+}
+
+.comments-section .comment-text {
+    color: #555;
+}
