@@ -17,6 +17,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.21.2",
     "express-validator": "^7.0.1",
+    "jshint": "^2.13.6",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
     "pino": "^8.17.2",

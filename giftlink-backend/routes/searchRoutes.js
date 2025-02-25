@@ -21,13 +21,13 @@ router.get('/', async (req, res, next) => {
             query.category = req.query.category;
         }
         if (req.query.condition) {
-            query.condition = req.query.condition
+            query.condition = req.query.condition;
         }
         if (req.query.age_years) {
             query.age_years = { $lte: parseInt(req.query.age_years) };
         }
 
-        await collection.find(query).toArray()
+        await collection.find(query).toArray();
 
         res.json(gifts);
     } catch (e) {
