@@ -4,15 +4,14 @@ import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const [incorrect, setIncorrect] = useState('');
+const navigate = useNavigate();
+const bearerToken = sessionStorage.getItem('bearer-token');
+const { setIsLoggedIn } = useAppContext();
+
 function LoginPage() {
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [incorrect, setIncorrect] = useState('');
-    const navigate = useNavigate();
-    const bearerToken = sessionStorage.getItem('bearer-token');
-    const { setIsLoggedIn } = useAppContext();
-
     useEffect(() => {
         if (sessionStorage.getItem('auth-token')) {
         navigate('/app')
