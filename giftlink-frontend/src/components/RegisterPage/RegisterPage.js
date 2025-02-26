@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { urlConfig } from '../../config';
+import React, { useState } from 'react';
+//Step 1 - Task 1
+import {urlConfig} from '../../config';
+
+//Step 1 - Task 2
 import { useAppContext } from '../../context/AuthContext';
+
+//Step 1 - Task 3
 import { useNavigate } from 'react-router-dom';
 
 import './RegisterPage.css';
@@ -10,42 +15,51 @@ function RegisterPage() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showerr, setShowerr] = useState('');
+
+    //Step 1 - Task 4
+     const [showerr, setShowerr] = useState('');
+
+    //Step 1 - Task 5
     const navigate = useNavigate();
     const { setIsLoggedIn } = useAppContext();
 
     const handleRegister = async () => {
-        try {
-            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password,
-                }),
-            });
+        const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+            //Step 1 - Task 6
+            method: 'POST',
+            //Step 1 - Task 7
+            headers: {
+                'content-type': 'application/json',
+            },
+            //Step 1 - Task 8
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            })
+        });
 
-            const json = await response.json();
+        //Step 2 - Task 1
+        const json = await response.json();
+        console.log('json data', json);
+        console.log('er', json.error);
 
-            if (json.authtoken) {
-                sessionStorage.setItem('auth-token', json.authtoken);
-                sessionStorage.setItem('name', firstName);
-                sessionStorage.setItem('email', json.email);
-                setIsLoggedIn(true);
-                navigate('/app');
-            }
-
-            if (json.error) {
-                setShowerr(json.error);
-            }
-        } catch (e) {
-            console.log('Error fetching details: ' + e.message);
+        //Step 2 - Task 2
+        if (json.authtoken) {
+            sessionStorage.setItem('auth-token', json.authtoken);
+            sessionStorage.setItem('name', firstName);
+            sessionStorage.setItem('email', json.email);
+        //Step 2 - Task 3
+            setIsLoggedIn(true);
+        //Step 2 - Task 4
+            navigate('/app');
         }
-    };
+        if (json.error) {
+        //Step 2 - Task 5
+            setShowerr(json.error);
+        }
+    }
 
     return (
         <div className="container mt-5">
@@ -54,31 +68,32 @@ function RegisterPage() {
                     <div className="register-card p-4 border rounded">
                         <h2 className="text-center mb-4 font-weight-bold">Register</h2>
                         <div className="mb-3">
-                            <label htmlFor="firstName" className="form-label">First Name</label>
+                            <label htmlFor="firstName" className="form-label">FirstName</label>
                             <input
                                 id="firstName"
                                 type="text"
                                 className="form-control"
-                                placeholder="Enter your first name"
+                                placeholder="Enter your firstName"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                         </div>
 
                         {/* last name */}
+
                         <div className="mb-3">
-                            <label htmlFor="lastName" className="form-label">Last Name</label>
+                            <label htmlFor="lastName" className="form-label">LastName</label>
                             <input
                                 id="lastName"
                                 type="text"
                                 className="form-control"
-                                placeholder="Enter your last name"
+                                placeholder="Enter your lastName"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
                         </div>
 
-                        {/* email */}
+                        {/* email  */}
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email</label>
                             <input
@@ -89,9 +104,11 @@ function RegisterPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
+                        {/* Step 2 - Task 6*/}
+
+                                <div className="text-danger">{showerr}</div>
                         </div>
 
-                        {/* password */}
                         <div className="mb-4">
                             <label htmlFor="password" className="form-label">Password</label>
                             <input
@@ -103,17 +120,7 @@ function RegisterPage() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-
-                        {/* Display error message if any */}
-                        {showerr && (
-                            <div className="alert alert-danger" role="alert">
-                                {showerr}
-                            </div>
-                        )}
-
-                        <button className="btn btn-primary w-100 mb-3" onClick={handleRegister}>
-                            Register
-                        </button>
+                        <button className="btn btn-primary w-100 mb-3" onClick={handleRegister}>Register</button>
                         <p className="mt-4 text-center">
                             Already a member? <a href="/app/login" className="text-primary">Login</a>
                         </p>
